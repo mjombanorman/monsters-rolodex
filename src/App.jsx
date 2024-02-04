@@ -1,11 +1,11 @@
 import { Component } from "react";
 import CardList from "./components/card-list/card-list.component";
 class App extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       monsters: [],
+      searchField: "",
     };
   }
 
@@ -14,12 +14,18 @@ class App extends Component {
       .then((response) => response.json())
       .then((users) => this.setState({ monsters: users }));
   }
- 
+
   render() {
     return (
       <div>
-        <CardList monsters={this.state.monsters}/>
- 
+        <input
+          type="search"
+          placeholdder="Search Monsters..."
+          onChange={(e) =>
+            this.setState({ searchField: e.target.value })
+          }
+        />
+        <CardList monsters={this.state.monsters} />
       </div>
     );
   }
